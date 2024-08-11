@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "climate-dashboard"
+dynamic = ["version"]
+description = 'Streamlit + Pygwalker Dashboard for a Climate Change dataset'
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Will Sharpe" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "streamlit",
+  "pygwalker",
+  "pandas",
+  "plotly",
+  ""
+]
+
+[project.urls]
+Documentation = "https://github.com/wjsharpe41/climate-dashboard#readme"
+Issues = "https://github.com/wjsharpe41/climate-dashboard/issues"
+Source = "https://github.com/U.N. Owen/climate-dashboard"
+
+[tool.hatch.version]
+path = "src/climate_dashboard/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/climate_dashboard tests}"
+
+[tool.coverage.run]
+source_pkgs = ["climate_dashboard", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/climate_dashboard/__about__.py",
+]
+
+[tool.coverage.paths]
+climate_dashboard = ["src/climate_dashboard", "*/climate-dashboard/src/climate_dashboard"]
+tests = ["tests", "*/climate-dashboard/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
